@@ -9,7 +9,7 @@ Ext.define('SimpleApp.view.main.List', {
         'SimpleApp.store.Personnel'
     ],
 
-    title: 'Personnel',
+    //title: 'Personnel',
 
     store: {
         type: 'personnel'
