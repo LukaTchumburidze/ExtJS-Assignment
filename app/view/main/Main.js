@@ -13,6 +13,11 @@ Ext.define('SimpleApp.view.main.Main', {
         'SimpleApp.view.main.List'
     ],
 
+    onResize: function () {
+        //Just for fun
+        console.log (this.width);
+    },
+
     controller: 'main',
     viewModel: 'main',
 

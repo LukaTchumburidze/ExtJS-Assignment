@@ -2,14 +2,14 @@ Ext.define('SimpleApp.view.main.AnimalView', {
     extend: 'Ext.panel.Panel',
     requires: [
         'Ext.layout.container.HBox',
+        'SimpleApp.view.main.TreeView',
         'SimpleApp.view.main.FilterView'
     ],
 
     xtype: 'layout-horizontal-box',
-    
+
     layout: {
         type: 'hbox',
-        pack: 'start',
         align: 'stretch'
     },
 
@@ -20,8 +20,9 @@ Ext.define('SimpleApp.view.main.AnimalView', {
 
     items: [{
             title: 'Hierarchy',
+            xtype: 'tree-view',
             margin: '0 10 0 0',
-            width: 400
+            flex: 1
         },
         {
             title: 'Data',
