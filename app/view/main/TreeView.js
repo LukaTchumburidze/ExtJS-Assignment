@@ -1,36 +1,10 @@
-var storeObj = Ext.create('Ext.data.TreeStore', {
-    root: {
-        expanded: true,
-        children: [{
-                text: 'detention',
-                leaf: true
-            },
-            {
-                text: 'homework',
-                children: [{
-                        text: 'book report',
-                        leaf: true
-                    },
-                    {
-                        text: 'algebra',
-                        leaf: true
-                    }
-                ]
-            },
-            {
-                text: 'buy lottery tickets',
-                leaf: true
-            }
-        ]
-    }
-});
-
 Ext.define('SimpleApp.view.main.TreeView', {
     extend: 'Ext.tree.Panel',
+    requires: ['SimpleApp.store.TreeStore'],
     xtype: 'tree-view',
-    title: 'Just a tree',
+    id: 'tree-view',
 
-    store: storeObj,
+    store: Ext.create('treeStore'),
 
     rootVisible: false,
     bodyPadding: 10

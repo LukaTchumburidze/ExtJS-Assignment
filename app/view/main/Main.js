@@ -3,20 +3,15 @@ Ext.define('SimpleApp.view.main.Main', {
     xtype: 'layout-cardtabs',
 
     requires: [
+        'SimpleApp.store.Municipalities',
         'SimpleApp.view.main.AnimalView',
         'Ext.layout.container.Card',
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
 
         'SimpleApp.view.main.MainController',
-        'SimpleApp.view.main.MainModel',
-        'SimpleApp.view.main.List'
+        'SimpleApp.view.main.MainModel'
     ],
-
-    onResize: function () {
-        //Just for fun
-        console.log (this.width);
-    },
 
     controller: 'main',
     viewModel: 'main',

@@ -1,15 +1,8 @@
 Ext.define('SimpleApp.store.Municipalities', {
-    extend: 'Ext.data.TreeStore',
-    alias: 'store.municipalities',
+    extend: 'Ext.data.Store',
+    alias: 'municipalities',
+    storeId: 'municipalities',
+    autoLoad: 'true',
 
-    rootData: {
-        text: 'Municipalities',
-        expanded: true,
-        children: [{
-            text: 'FirstMunicipality',
-            children: [
-                {leaf: true, text: 'Zebra'}
-            ]
-        }]
-    }
+    model: 'SimpleApp.model.Municipality'
 });

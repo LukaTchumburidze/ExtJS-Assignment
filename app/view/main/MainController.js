@@ -1,21 +1,39 @@
-/**
- * This class is the controller for the main view for the application. It is specified as
- * the "controller" of the Main view class.
- *
- * TODO - Replace this content of this view to suite the needs of your application.
- */
 Ext.define('SimpleApp.view.main.MainController', {
     extend: 'Ext.app.ViewController',
 
     alias: 'controller.main',
 
-    onItemSelected: function (sender, record) {
-        Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
-    },
+    init: function () {
+        var viewModel = this.getView('layout-horizontal-box').getViewModel();
+        var treeView = this.getView().down('#tree-view');
 
-    onConfirm: function (choice) {
-        if (choice === 'yes') {
-            //
+        console.log (viewModel);
+        var municipalities = viewModel.data['municipalities'];
+        console.log (municipalities);
+
+        for (let i = 0; i < municipalities.count(); i ++) {
+            console.log(municipalities.getAt(i));
+            let animalStore = municipalities.getAt(i).children();
+            animalStore.load();
+            console.log(animalStore.count());
+
+            for (let j = 0; j < animalStore.count(); j++) {
+                console.log(animalStore.getAt(j));
+                let censusStore = animalStore.getAt(j).children();
+                censusStore.load();
+                console.log("censusStore: " + censusStore.count());
+
+                for (let k = 0; k < censusStore.count(); k++) {
+                    console.log(censusStore.getAt(k));
+                }
+            }
         }
+
+        console.log ('End of stores!');
+        console.log (treeView.getSelectionModel());
+        console.log (treeView.getStore());
+        console.log (Ext.create('SimpleApp.store.TreeStore'));
     }
 });
+
+
