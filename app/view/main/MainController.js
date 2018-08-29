@@ -4,8 +4,8 @@ Ext.define('SimpleApp.view.main.MainController', {
     alias: 'controller.main',
 
     init: function () {
-        var viewModel = this.getView('layout-horizontal-box').getViewModel();
-        var treeView = this.getView().down('#tree-view');
+        var viewModel = this.getView('animal-view').getViewModel();
+        var treeView = this.getView().down('tree-view');
 
         console.log (viewModel);
         var municipalities = viewModel.data['municipalities'];
@@ -32,7 +32,6 @@ Ext.define('SimpleApp.view.main.MainController', {
         console.log ('End of stores!');
         console.log (treeView.getSelectionModel());
         console.log (treeView.getStore());
-        console.log (Ext.create('SimpleApp.store.TreeStore'));
     }
 });
 

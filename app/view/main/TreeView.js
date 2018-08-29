@@ -4,6 +4,21 @@ Ext.define('SimpleApp.view.main.TreeView', {
     xtype: 'tree-view',
     id: 'tree-view',
 
+    selecionModel: {
+
+        listeners: {
+            selectionchange: function () {
+                console.log('Changed');
+            }
+        }
+    },
+
+    listeners: {
+        beforeselect: function () {
+            console.log ("hiiiiiiiiiiiiiiiiii");
+        }
+    },
+
     store: Ext.create('treeStore'),
 
     rootVisible: false,

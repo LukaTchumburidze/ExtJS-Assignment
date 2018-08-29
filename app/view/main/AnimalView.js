@@ -10,8 +10,6 @@ Ext.define('SimpleApp.view.main.AnimalView', {
         //
     ],
 
-    sesion: {},
-
     xtype: 'layout-horizontal-box',
 
     layout: {
@@ -28,14 +26,15 @@ Ext.define('SimpleApp.view.main.AnimalView', {
     viewModel: 'main',
 
     items: [{
-            title: 'Hierarchy',
-            xtype: 'tree-view',
-            //bind: '{municipalities}',
-            margin: '0 10 0 0',
-            flex: 1
-        },
+        title: 'Hierarchy',
+        xtype: 'tree-view',
+        //bind: '{municipalities}',
+        margin: '0 10 0 0',
+        border: false,
+        flex: 1
+    },
         {
-            title: 'Data',
+            title: 'Connections',
             xtype: 'grid',
             bind: '{municipalities}',
             reference: 'municipalityGrid',
@@ -52,5 +51,30 @@ Ext.define('SimpleApp.view.main.AnimalView', {
             xtype: 'filter-form',
             width: 400
         }
-    ]
+    ],
+
+    tbar: [
+        '->',
+        {
+            text: 'Add Item',
+            handler: 'onAddClick',
+        },
+        {
+            text: 'Remove Item',
+            reference: 'removeEmployee',
+            handler: 'onRemoveClick',
+            disabled: true
+        },
+        {
+            text: 'Add Connection',
+            reference: 'removeEmployee',
+            handler: 'onRemoveClick',
+            disabled: true
+        },
+        {
+            text: 'Remove Connection',
+            reference: 'removeEmployee',
+            handler: 'onRemoveClick',
+            disabled: true
+        }],
 });

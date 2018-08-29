@@ -88,4 +88,10 @@ Ext.define('SimpleApp.store.TreeStore', {
             { leaf:true, text: 'ZIndexManager.js' }
         ]
     },
+
+    listeners: {
+        // beforeload: function () {
+        //     console.log ("hiiiiiiiiiiiiiiiiii");
+        // }
+    }
 });
