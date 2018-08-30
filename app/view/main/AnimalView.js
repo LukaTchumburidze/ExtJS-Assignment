@@ -4,17 +4,17 @@ Ext.define('SimpleApp.view.main.AnimalView', {
         'Ext.layout.container.HBox',
         'SimpleApp.view.main.TreeView',
         'SimpleApp.view.main.FilterView'
-
-
-
-        //
     ],
 
     xtype: 'layout-horizontal-box',
+    viewModel: {
+        type: 'main'
+    },
+
 
     layout: {
         type: 'hbox',
-        align: 'stretch'
+        align: 'stretch',
     },
 
     defaults: {
@@ -23,14 +23,12 @@ Ext.define('SimpleApp.view.main.AnimalView', {
     },
 
     referenceHolder: true,
-    viewModel: 'main',
 
     items: [{
         title: 'Hierarchy',
         xtype: 'tree-view',
         //bind: '{municipalities}',
         margin: '0 10 0 0',
-        border: false,
         flex: 1
     },
         {
@@ -51,30 +49,18 @@ Ext.define('SimpleApp.view.main.AnimalView', {
             xtype: 'filter-form',
             width: 400
         }
-    ],
-
-    tbar: [
-        '->',
-        {
-            text: 'Add Item',
-            handler: 'onAddClick',
-        },
-        {
-            text: 'Remove Item',
-            reference: 'removeEmployee',
-            handler: 'onRemoveClick',
-            disabled: true
-        },
-        {
-            text: 'Add Connection',
-            reference: 'removeEmployee',
-            handler: 'onRemoveClick',
-            disabled: true
-        },
-        {
-            text: 'Remove Connection',
-            reference: 'removeEmployee',
-            handler: 'onRemoveClick',
-            disabled: true
-        }],
+    ]
+    // tbar: [
+    //     '->',
+    //     {
+    //         text: 'Add Connection',
+    //         handler: 'onAddConnection',
+    //     },
+    //     {
+    //         text: 'Remove Connection',
+    //         handler: 'onRemoveConnection',
+    //         bind: {
+    //             disabled: '{!isConnectionDisabled}'
+    //         },
+    //     }]
 });

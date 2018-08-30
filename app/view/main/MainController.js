@@ -2,9 +2,14 @@ Ext.define('SimpleApp.view.main.MainController', {
     extend: 'Ext.app.ViewController',
 
     alias: 'controller.main',
+    onAddItem: function () {
+        console.log('hi');
+    },
 
     init: function () {
+        console.log ("abcde");
         var viewModel = this.getView('animal-view').getViewModel();
+        console.log(viewModel);
         var treeView = this.getView().down('tree-view');
 
         console.log (viewModel);
@@ -32,6 +37,10 @@ Ext.define('SimpleApp.view.main.MainController', {
         console.log ('End of stores!');
         console.log (treeView.getSelectionModel());
         console.log (treeView.getStore());
+    },
+
+    smth2: function () {
+        console.log("Clicked!");
     }
 });
 

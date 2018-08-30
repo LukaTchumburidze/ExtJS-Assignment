@@ -18,11 +18,18 @@ Ext.define('SimpleApp.view.main.MainModel', {
             model: 'Census',
             autoLoad: true
         }
-
     },
 
     data: {
-        isItemSelected: true,
-    }
+        isItemSelected: false,
+        isConnectionSelected: false,
+        selectedItem: null,
+    },
 
+    // formulas: {
+    //     abc: function (get) {
+    //         console.log (get('seletedItem'));
+    //         return get('selectedItem');
+    //     }
+    // }
 });
