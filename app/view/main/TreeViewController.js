@@ -3,24 +3,37 @@ Ext.define ('SimpleApp.view.main.TreeView.Controller', {
 
     alias: 'controller.treeview',
 
+    requires: [
+        'SimpleApp.view.window.NewItemWindow'
+    ],
+
     init: function () {
         var treeView = this.getView('tree-view');
         console.log (treeView);
         console.log("abc");
     },
 
-    selectionHandler: function (record, index) {
+    onRemoveItem: function () {
+        let viewModel = this.getView().getViewModel();
+        let selectedItem = viewModel.get('selectedItem');
+        selectedItem.remove();
+        //TODO: update store accordingly
 
-        // //console.log (record);
-        // let viewModel = this.getView().getViewModel();
-        // console.log ('a');
-        // console.log (viewModel);
-        // console.log (this.getViewModel().get('isItemSelected'));
-        // //viewModel.set('isItemSelected', true);
-        // console.log (this.getViewModel().get('isItemSelected'));
+        console.log (selectedItem);
     },
 
-    beforeselect: function () {
-        console.log ("hiiiiiiiiiiiiiiiiii");
+    onAddItem: function () {
+        let selectedItem = this.getView().getViewModel().get('selectedItem');
+        let depth;
+
+        // if (selectedItem === undefined || selectedItem == null) {
+        //     depth = 0;
+        // } else {
+        //     depth = selectedItem.data.depth;
+        // }
+
+        var win = Ext.create('SimpleApp.view.window.NewItemWindow');
+        win.show();
+
     }
 });

@@ -16,14 +16,11 @@ Ext.define('SimpleApp.view.main.TreeView', {
         selection: '{selectedItem}'
     },
 
-    listeners: {
-        beforeselect: 'selectionHandler'
-    },
-
     store: Ext.create('treeStore'),
 
     rootVisible: false,
     bodyPadding: 10,
+    toggleOnDblClick: true,
 
     tbar: [
         '->',

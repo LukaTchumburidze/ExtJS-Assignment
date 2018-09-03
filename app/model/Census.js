@@ -10,6 +10,7 @@ Ext.define('SimpleApp.model.Census', {
             type: 'number'
         }, {
             name: 'date',
+            dateFormat:'d/m/Y',
             type: 'date'
         }, {
             name: 'parentID',

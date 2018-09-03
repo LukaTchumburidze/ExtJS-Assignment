@@ -212,7 +212,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                 blackberry: 'BlackBerry',
                 rimTablet: 'RIMTablet',
                 mac: 'MacOS',
-                win: 'Windows',
+                win: 'window',
                 tizen: 'Tizen',
                 linux: 'Linux',
                 bada: 'Bada',
@@ -255,7 +255,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                 ios: 'i(?:Pad|Phone|Pod)(?:.*)CPU(?: iPhone)? OS ',
                 android: '(Android |HTC_|Silk/)', // Some HTC devices ship with an OSX userAgent by default,
                 // so we need to add a direct check for HTC_
-                windowsPhone: 'Windows Phone ',
+                windowsPhone: 'window Phone ',
                 blackberry: '(?:BlackBerry|BB)(?:.*)Version\/',
                 rimTablet: 'RIM Tablet OS ',
                 webos: '(?:webOS|hpwOS)\/',
@@ -319,7 +319,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                             value, key, index, len, match, version, matched;
 
                         // MS Edge browser (and possibly others) can report multiple browsers in the UserAgent
-                        // "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240"
+                        // "Mozilla/5.0 (window NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240"
                         // we use this to prioritize the actual browser in this situation
                         len = me.browserPriority.length;
                         for (index = 0; index < len; index++) {

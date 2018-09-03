@@ -1,6 +1,3 @@
-/**
- * This class is the view model for the Main view of the application.
- */
 Ext.define('SimpleApp.view.main.MainModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.main',
@@ -8,14 +5,17 @@ Ext.define('SimpleApp.view.main.MainModel', {
     stores: {
         municipalities: {
             model: 'Municipality',
+            storeId: 'municipalities',
             autoLoad: true
         },
         animals: {
             model: 'Animal',
+            storeId: 'animals',
             autoLoad: true
         },
         censuses: {
             model: 'Census',
+            storeId: 'censuses',
             autoLoad: true
         }
     },
@@ -24,12 +24,19 @@ Ext.define('SimpleApp.view.main.MainModel', {
         isItemSelected: false,
         isConnectionSelected: false,
         selectedItem: null,
+        pastSelectedItem: null,
+        chosenModelFieldset: null,
     },
 
-    // formulas: {
-    //     abc: function (get) {
-    //         console.log (get('seletedItem'));
-    //         return get('selectedItem');
-    //     }
-    // }
+    formulas: {
+        fieldSetName: function (get) {
+            var chosenModelFieldset = get('chosenModelFieldset');
+            if (chosenModelFieldset != null) {
+                return chosenModelFieldset.getData()['viewXtype'];
+            }
+
+            return '';
+
+        }
+    }
 });
