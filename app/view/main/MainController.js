@@ -8,7 +8,7 @@ Ext.define('SimpleApp.view.main.MainController', {
 
     buildInitialTree: function (municipalities) {
         var data = {
-            text: 'Ext JS',
+            text: 'Main Node',
             expanded: true,
             children: []
         };
@@ -20,15 +20,13 @@ Ext.define('SimpleApp.view.main.MainController', {
 
         for (let i = 0; i < municipalities.count(); i++) {
             var curMunicipality = municipalities.getAt(i);
-            console.log(curMunicipality.getId());
-            var curData = {
+            data.children.push({
                 text: curMunicipality.get('EngName'),
                 id: curMunicipality.getId(),
                 expanded: false,
                 depth: 1,
                 children: [emptyChild]
-            };
-            data.children.push(curData);
+            });
         }
 
         return data;

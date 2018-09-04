@@ -17,6 +17,11 @@ Ext.define('SimpleApp.view.main.MainModel', {
             model: 'Census',
             storeId: 'censuses',
             autoLoad: true
+        },
+        gridStore: {
+            model: 'GridRow',
+            storeId: 'grid-store',
+            autoLoad: false
         }
     },
 
@@ -26,6 +31,7 @@ Ext.define('SimpleApp.view.main.MainModel', {
         selectedItem: null,
         pastSelectedItem: null,
         chosenModelFieldset: null,
+        censusSelected: false,
     },
 
     formulas: {

@@ -3,7 +3,6 @@ Ext.define('SimpleApp.view.main.Main', {
     xtype: 'layout-cardtabs',
 
     requires: [
-        'SimpleApp.store.Municipalities',
         'SimpleApp.view.main.AnimalView',
         'Ext.layout.container.Card',
         'Ext.plugin.Viewport',

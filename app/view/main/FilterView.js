@@ -6,62 +6,33 @@ Ext.define('SimpleApp.view.main.FilterView', {
     bodyPadding: 10,
     scrollable: true,
 
+    requires: [
+        'SimpleApp.view.form.AnimalForm',
+        'SimpleApp.view.form.MunicipalityForm'
+    ],
+
     fieldDefaults: {
         labelAlign: 'right',
         labelWidth: 115,
         msgTarget: 'side'
     },
 
-    items: [{
-        xtype: 'fieldset',
-        title: 'Animal',
-        defaultType: 'textfield',
-        defaults: {
-            anchor: '100%'
+    items: [
+        {
+            xtype: 'municipality-form'
         },
-
-        items: [{
-                fieldLabel: 'Georgian Name',
-                name: 'GeoName',
-                emptyText: 'ქართული დასახელება'
-            },
-            {
-                fieldLabel: 'English Name',
-                name: 'EngName',
-                emptyText: 'English Name'
-            },
-            {
-                fieldLabel: 'Latin Name',
-                name: 'GeoName',
-                emptyText: 'Latine Nomine'
-            },
-        ]
-    }, {
-        xtype: 'fieldset',
-        title: 'Population Census',
-        defaults: {
-            anchor: '100%'
+        {
+            xtype: 'animal-form'
         },
-
-        items: [{
-            fieldLabel: 'Amount',
-            xtype: 'numberfield',
-            name: 'Amount',
-            emptyText: 'Amount of Population'
-        }, {
-            fieldLabel: 'Date',
-            xtype: 'datefield',
-            name: 'Date',
-            emptyText: 'Date of Census'
-        }]
-    }, {
+        {
+            xtype: 'census-form'
+        }/*, {
         xtype: 'fieldset',
         title: 'Source',
         defaultType: 'textfield',
         defaults: {
             anchor: '100%'
         },
-
         items: [{
             fieldLabel: 'Georgian Name',
             name: 'GeoName',
@@ -74,9 +45,7 @@ Ext.define('SimpleApp.view.main.FilterView', {
             fieldLabel: 'Document',
             name: 'Document',
             emptyText: 'Name of Document'
-        }]
-
-    }],
+    }*/],
 
     buttons: [{
         text: 'Filter',

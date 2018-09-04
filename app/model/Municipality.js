@@ -2,7 +2,8 @@ Ext.define('SimpleApp.model.Municipality', {
     extend: 'SimpleApp.model.BaseModel',
 
     requires: [
-        'SimpleApp.model.Animal'
+        'SimpleApp.model.Animal',
+        'SimpleApp.model.GridRow'
     ],
 
     fields: [{

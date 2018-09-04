@@ -2,7 +2,7 @@ Ext.define('SimpleApp.view.window.NewItemWindow', {
     extend: 'Ext.window.Window',
     title: 'Add Item: ',
     width: 500,
-    height: 800,
+    height: 500,
     modal: true,
 
     requires: [
@@ -14,7 +14,7 @@ Ext.define('SimpleApp.view.window.NewItemWindow', {
     },
 
     items: [
-        {
+        /*{
             xtype: 'fieldset',
             title: 'Choose item type',
             items: [
@@ -38,24 +38,11 @@ Ext.define('SimpleApp.view.window.NewItemWindow', {
                     }
                 }
             ],
-        },
+        },*/
         {
             xtype: 'fieldset',
-            viewModel: {
-                type: 'main'
-            },
-            bind: {
-                title: '{fieldSetName}'
-            }
+            title: 'Animal',
         },
-        {
-            fbar: [
-                {
-                    text: 'Submit',
-                    formBind: true,
-                    itemId: 'submit'
-                }
-            ]
-        }
+
     ]
 });

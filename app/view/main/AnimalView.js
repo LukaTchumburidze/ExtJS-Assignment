@@ -27,20 +27,12 @@ Ext.define('SimpleApp.view.main.AnimalView', {
     items: [{
         title: 'Hierarchy',
         xtype: 'tree-view',
-        //bind: '{municipalities}',
         margin: '0 10 0 0',
         flex: 1
     },
         {
-            title: 'Connections',
-            xtype: 'grid',
-            bind: '{municipalities}',
-            reference: 'municipalityGrid',
-            columns: [{
-                text: 'Name',
-                dataIndex: 'EngName'
-                //TODO:///////
-            }],
+            xtype: 'connection-grid',
+            reference: 'connectionGrid',
             margin: '0 10 0 0',
             flex: 1
         },

@@ -16,6 +16,10 @@ Ext.define('SimpleApp.view.main.TreeView', {
         selection: '{selectedItem}'
     },
 
+    listeners: {
+        select: 'nodeSelect'
+    },
+
     store: Ext.create('treeStore'),
 
     rootVisible: false,
@@ -27,6 +31,9 @@ Ext.define('SimpleApp.view.main.TreeView', {
         {
             text: 'Add Item',
             handler: 'onAddItem',
+            bind: {
+                disabled: '{censusSelected}'
+            }
         },
         {
             text: 'Remove Item',
