@@ -17,6 +17,11 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
         console.log(selectedItem);
     },
 
+    // onEditItem: function () {
+    //     let selectedItem = this.getView().getViewModel().get('selectedItem');
+    //     showWindow (selectedItem, selectedItem.getDepth()-1);
+    // },
+
     onAddItem: function () {
         let selectedItem = this.getView().getViewModel().get('selectedItem');
         let depth;
@@ -126,6 +131,7 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
         } else {
             this.getView().getViewModel().set('censusSelected', false);
         }
+        console.log(this.getView().getViewModel().get('censusSelected'));
 
         let dataSoFar = Ext.create('gridRow');
         let connectionStore = this.getView().up().down('connection-grid').getViewModel().get('gridStore');

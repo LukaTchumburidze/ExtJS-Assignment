@@ -32,7 +32,14 @@ Ext.define('SimpleApp.view.main.TreeView', {
             text: 'Add Item',
             handler: 'onAddItem',
             bind: {
-                disabled: '{censusSelected}'
+                disabled: '{censusSelected || !selectedItem}'
+            }
+        },
+        {
+            text: 'Edit Item',
+            handler: 'onEditItem',
+            bind: {
+                disabled: '{!selectedItem}'
             }
         },
         {
