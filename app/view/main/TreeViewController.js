@@ -5,7 +5,8 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
     viewModel: 'main',
 
     requires: [
-        'SimpleApp.view.window.NewItemWindow'
+        'SimpleApp.view.window.NewItemWindow',
+        'Ext.data.StoreManager'
     ],
 
     onRemoveItem: function () {
@@ -31,7 +32,17 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
             depth = selectedItem.getDepth();
         }
         let titleMapping = ['Municipality', 'Animal', 'Census'];
-        let xtypeMapping = ['municipality-form', 'animal-form', 'census-form'];
+        let formXtypeMapping = ['municipality-form', 'animal-form', 'census-form'];
+        let modelXtypeMapping = ['municipality', 'animal', 'census'];
+        let storeIdMapping = ['municipalities', 'animals', 'censuses'];
+
+        let curModel = Ext.create (modelXtypeMapping[depth]);
+        let parModel;
+        if (depth) {
+            parModel = Ext.data.StoreManager.get(modelXtypeMapping[depth-1]).getById(selectedItem.id);
+        }
+        let curStore = this.getView().getViewModel().get(storeIdMapping[depth]);
+        var treeStore = this.getView().getStore();
 
         // if (selectedItem === undefined || selectedItem == null) {
         //     depth = 0;
@@ -39,10 +50,14 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
         //     depth = selectedItem.data.depth;
         // }
 
-        let win = Ext.create('SimpleApp.view.window.NewItemWindow', {
+        let win = Ext.create('Ext.window.Window', {
+            title: 'Add Item',
+            width: 500,
+            height: 500,
+
             items: [
                 {
-                    xtype: xtypeMapping[depth],
+                    xtype: formXtypeMapping[depth],
                     title: titleMapping[depth]
                 },
                 {
@@ -50,7 +65,35 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
                         {
                             text: 'Submit',
                             formBind: true,
-                            itemId: 'submit'
+                            itemId: 'submit',
+                            handler: function () {
+                                let formFields = win.items.getRange()[0].items.getRange();
+                                let modelFields = curModel.getFields();
+                                let modelMapping = {};
+                                console.log(formFields);
+                                console.log(modelFields);
+
+                                for (let i = 0; i < formFields.length; i ++) {
+                                    curModel.set(modelFields[i+1].getName(), formFields[i].value);
+                                    modelMapping[modelFields[i+1].getName()] = formFields[i].value;
+                                }
+
+                                curModel.set('parentId', selectedItem.id);
+                                modelMapping['parentId'] = selectedItem.id;
+                                modelMapping['id'] = curModel.getId();
+                                console.log(parModel);
+                                parModel.children().add(curModel);
+                                curModel.getProxy().data.push(modelMapping);
+                                curStore.load({
+                                    callback: function () {
+                                        console.log('Loaded');
+                                        console.log(curStore);
+                                        win.close();
+                                    }
+                                });
+
+                                console.log("hi");
+                            }
                         }
                     ]
                 }
