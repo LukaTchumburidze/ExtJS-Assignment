@@ -33,7 +33,7 @@ Ext.define('SimpleApp.store.TreeStore', {
                     let children = curStore.getById(node.data.id).children();
                     console.log('loaded curStore');
                     console.log(curStore);
-                    children.sync({
+                    children.load({
                         callback: function () {
                             console.log('children loaded');
                             console.log(children);

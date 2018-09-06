@@ -3,11 +3,10 @@ Ext.define('SimpleApp.view.form.AnimalForm', {
     alias: 'animal-form',
     xtype: 'animal-form',
 
-
     title: 'Animal',
     defaultType: 'textfield',
     defaults: {
-        anchor: '100%'
+        anchor: '100%',
     },
 
     items: [
@@ -23,7 +22,7 @@ Ext.define('SimpleApp.view.form.AnimalForm', {
         },
         {
             fieldLabel: 'Latin Name',
-            name: 'AnimalGeoName',
+            name: 'AnimalLatName',
             emptyText: 'Latine Nomine'
         },
     ]

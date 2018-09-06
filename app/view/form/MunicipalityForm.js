@@ -3,7 +3,6 @@ Ext.define('SimpleApp.view.form.MunicipalityForm', {
     alias: 'municipality-form',
     xtype: 'municipality-form',
 
-
     title: 'Municipality',
     defaultType: 'textfield',
     defaults: {
@@ -13,12 +12,12 @@ Ext.define('SimpleApp.view.form.MunicipalityForm', {
     items: [
         {
             fieldLabel: 'Georgian Name',
-            name: 'AnimalGeoName',
+            name: 'MunicipalityEngName',
             emptyText: 'ქართული დასახელება'
         },
         {
             fieldLabel: 'English Name',
-            name: 'AnimalEngName',
+            name: 'MunicipalityGeoName',
             emptyText: 'English Name'
         }
     ]

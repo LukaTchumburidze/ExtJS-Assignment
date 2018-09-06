@@ -4,6 +4,7 @@ Ext.define('SimpleApp.view.main.ConnectionGrid', {
     xtype: 'connection-grid',
 
     requires: [
+        'Ext.toolbar.Paging',
         'SimpleApp.view.main.MainModel'
     ],
 
@@ -52,4 +53,17 @@ Ext.define('SimpleApp.view.main.ConnectionGrid', {
             flex: 1
         }
     ],
+
+    bbar: {
+        xtype: 'pagingtoolbar',
+        displayInfo: true,
+        displayMsg: 'Displaying topics {0} - {1} of {2}',
+
+        items: ['-', {
+            bind: '{expanded ? "Hide Preview" : "Show Preview"}',
+            pressed: '{expanded}',
+            enableToggle: true,
+            toggleHandler: 'onToggleExpanded'
+        }]
+    }
 });

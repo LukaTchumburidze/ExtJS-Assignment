@@ -39,7 +39,9 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
         let curModel = Ext.create (modelXtypeMapping[depth]);
         let parModel;
         if (depth) {
-            parModel = Ext.data.StoreManager.get(modelXtypeMapping[depth-1]).getById(selectedItem.id);
+            console.log('store');
+            console.log(Ext.data.StoreManager);
+            parModel = Ext.data.StoreManager.get(storeIdMapping[depth-1]).getById(selectedItem.id);
         }
         let curStore = this.getView().getViewModel().get(storeIdMapping[depth]);
         var treeStore = this.getView().getStore();
@@ -82,8 +84,14 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
                                 modelMapping['parentId'] = selectedItem.id;
                                 modelMapping['id'] = curModel.getId();
                                 console.log(parModel);
-                                parModel.children().add(curModel);
+                                console.log('children');
                                 curModel.getProxy().data.push(modelMapping);
+                                //parModel.children().getProxy().data.push(modelMapping);
+                                parModel.children().load({
+                                    callback: function () {
+                                        console.log(parModel.children());
+                                    }
+                                });
                                 curStore.load({
                                     callback: function () {
                                         console.log('Loaded');

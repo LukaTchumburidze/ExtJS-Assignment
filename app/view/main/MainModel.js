@@ -20,6 +20,7 @@ Ext.define('SimpleApp.view.main.MainModel', {
         },
         gridStore: {
             model: 'GridRow',
+            pageSize: 5,
             storeId: 'grid-store',
             autoLoad: false
         }
