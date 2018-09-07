@@ -11,6 +11,7 @@ Ext.define('SimpleApp.view.form.CensusForm', {
     items: [{
         fieldLabel: 'Amount',
         xtype: 'numberfield',
+        minValue: 0,
         name: 'CensusPopulation',
         emptyText: 'Amount of Population'
     }, {
