@@ -1,5 +1,6 @@
 Ext.define('SimpleApp.model.Municipality', {
     extend: 'SimpleApp.model.BaseModel',
+    alias: 'municipality',
 
     requires: [
         'SimpleApp.model.Animal',
@@ -36,33 +37,3 @@ Ext.define('SimpleApp.model.Municipality', {
         }
     }
 });
-
-// data: [
-//     {
-//         "id": "europe",
-//         "EngName": "Europe",
-//         "GeoName": "ევროპა",
-//         "animals": [
-//             {
-//                 "id": "wolf",
-//                 "EngName": "Wolf",
-//                 "GeoName": "მგელი",
-//                 "LatName": "Lupus",
-//                 "parentID": "europe"
-//             }
-//         ]
-//     },
-//     {
-//         "id": "africa",
-//         "EngName": "Africa",
-//         "GeoName": "აფრიკა",
-//         "animals": [
-//             {
-//                 "id": "lion",
-//                 "EngName": "Lion",
-//                 "GeoName": "ლომი",
-//                 "LatName": "Leo",
-//                 "parentID": "europe"
-//             }
-//         ]
-//     }],

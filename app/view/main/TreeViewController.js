@@ -5,38 +5,33 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
     viewModel: 'main',
 
     requires: [
-        'SimpleApp.model.Animal',
         'SimpleApp.model.Municipality',
+        'SimpleApp.model.Animal',
         'SimpleApp.model.Census',
         'Ext.data.StoreManager'
     ],
 
-    onRemoveItem: function () {
+    onRemoveItem: function (node) {
         let viewModel = this.getView().getViewModel();
         let selectedItem = viewModel.get('selectedItem');
         selectedItem.remove();
-        //TODO: update store accordingly
 
         console.log(selectedItem);
+        let curStore = Ext.data.StoreManager.get(storeIdMapping[selectedItem.getDepth()-1]);
+        curStore.remove(curStore.getById(selectedItem.id));
     },
 
-    // onEditItem: function () {
-    //     let selectedItem = this.getView().getViewModel().get('selectedItem');
-    //     showWindow (selectedItem, selectedItem.getDepth()-1);
-    // },
+    onEditItem: function () {
+        console.log('Method is not yet implemented!');
+    },
 
     onAddItem: function () {
-        let selectedItem = this.getView().getViewModel().get('selectedItem');
-        let depth;
+        let depth, selectedItem = this.getView().getViewModel().get('selectedItem');
         if (selectedItem == null || selectedItem === undefined) {
             depth = 0;
         } else {
             depth = selectedItem.getDepth();
         }
-        let titleMapping = ['Municipality', 'Animal', 'Census'];
-        let formXtypeMapping = ['municipality-form', 'animal-form', 'census-form'];
-        let modelXtypeMapping = ['municipality', 'animal', 'census'];
-        let storeIdMapping = ['municipalities', 'animals', 'censuses'];
 
         let curModel = Ext.create (modelXtypeMapping[depth]);
 //        let parModel;

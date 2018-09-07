@@ -1,6 +1,7 @@
 Ext.define('SimpleApp.store.TreeStore', {
     extend: 'Ext.data.TreeStore',
     alias: 'treeStore',
+    xtype: 'treeStore',
     storeId: 'treeStore',
 
     root: {
@@ -11,9 +12,6 @@ Ext.define('SimpleApp.store.TreeStore', {
 
     listeners: {
         nodebeforeexpand: function (node) {
-            // if (node.firstChild.data.text !== 'empty') {
-            //     return;
-            // }
             console.log('expanded');
             if (node.firstChild.data.text !== 'empty') {
                 return;
