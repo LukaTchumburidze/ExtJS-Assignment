@@ -5,7 +5,9 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
     viewModel: 'main',
 
     requires: [
-        'SimpleApp.view.window.NewItemWindow',
+        'SimpleApp.model.Animal',
+        'SimpleApp.model.Municipality',
+        'SimpleApp.model.Census',
         'Ext.data.StoreManager'
     ],
 
@@ -37,11 +39,11 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
         let storeIdMapping = ['municipalities', 'animals', 'censuses'];
 
         let curModel = Ext.create (modelXtypeMapping[depth]);
-        let parModel;
+//        let parModel;
         if (depth) {
             console.log('store');
             console.log(Ext.data.StoreManager);
-            parModel = Ext.data.StoreManager.get(storeIdMapping[depth-1]).getById(selectedItem.id);
+//            parModel = Ext.data.StoreManager.get(storeIdMapping[depth-1]).getById(selectedItem.id);
         }
         let curStore = this.getView().getViewModel().get(storeIdMapping[depth]);
         var treeStore = this.getView().getStore();
@@ -83,15 +85,15 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
                                 curModel.set('parentId', selectedItem.id);
                                 modelMapping['parentId'] = selectedItem.id;
                                 modelMapping['id'] = curModel.getId();
-                                console.log(parModel);
+//                                console.log(parModel);
                                 console.log('children');
                                 curModel.getProxy().data.push(modelMapping);
                                 //parModel.children().getProxy().data.push(modelMapping);
-                                parModel.children().load({
-                                    callback: function () {
-                                        console.log(parModel.children());
-                                    }
-                                });
+//                                parModel.children().load({
+//                                     callback: function () {
+//                                         console.log(parModel.children());
+//                                     }
+//                                });
                                 curStore.load({
                                     callback: function () {
                                         console.log('Loaded');

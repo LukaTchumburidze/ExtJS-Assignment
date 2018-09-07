@@ -53,6 +53,51 @@ Ext.define('SimpleApp.model.Census', {
                 "population": "254",
                 "date": "31/08/2018",
                 "parentID": "wolf"
+            },
+            {
+                "population": "254",
+                "date": "31/08/2018",
+                "parentID": "wolf"
+            },
+            {
+                "population": "254",
+                "date": "31/08/2018",
+                "parentID": "wolf"
+            },
+            {
+                "population": "254",
+                "date": "31/08/2018",
+                "parentID": "wolf"
+            },
+            {
+                "population": "254",
+                "date": "31/08/2018",
+                "parentID": "wolf"
+            },
+            {
+                "population": "254",
+                "date": "31/08/2018",
+                "parentID": "wolf"
+            },
+            {
+                "population": "254",
+                "date": "31/08/2018",
+                "parentID": "wolf"
+            },
+            {
+                "population": "254",
+                "date": "31/08/2018",
+                "parentID": "wolf"
+            },
+            {
+                "population": "254",
+                "date": "31/08/2018",
+                "parentID": "wolf"
+            },
+            {
+                "population": "254",
+                "date": "31/08/2018",
+                "parentID": "wolf"
             }
         ],
 
