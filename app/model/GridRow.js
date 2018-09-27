@@ -4,31 +4,31 @@ Ext.define('SimpleApp.model.GridRow', {
 
     fields: [
         {
-            name: 'MunicipalityEngName',
+            name: 'municipalityEngName',
             type: 'string'
         },
         {
-            name: 'MunicipalityGeoName',
+            name: 'municipalityGeoName',
             type: 'string'
         },
         {
-            name: 'AnimalLatName',
+            name: 'animalLatName',
             type: 'string'
         },
         {
-            name: 'AnimalEngName',
+            name: 'animalEngName',
             type: 'string'
         },
         {
-            name: 'AnimalGeoName',
+            name: 'animalGeoName',
             type: 'string'
         },
         {
-            name: 'CensusPopulation',
+            name: 'population',
             type: 'string'
         },
         {
-            name: 'CensusDate',
+            name: 'date',
             type: 'date',
             dateFormat: 'd/m/Y'
         }

@@ -22,43 +22,43 @@ Ext.define('SimpleApp.view.main.ConnectionGrid', {
         {
             text: 'Municipality Name (Eng)',
             alt: 'Municipality Name (Eng)',
-            dataIndex: 'MunicipalityEngName',
+            dataIndex: 'municipalityEngName',
             flex: 1,
             filter: 'string'
         },
         {
             text: 'Municipality Name (Geo)',
-            dataIndex: 'MunicipalityGeoName',
+            dataIndex: 'geoName',
             type: 'string',
             filter: 'string'
         },
         {
             text: 'Animal Name (Lat)',
-            dataIndex: 'AnimalLatName',
+            dataIndex: 'animalLatName',
             flex: 1,
             filter: 'string'
         },
         {
             text: 'Animal Name (Eng)',
-            dataIndex: 'AnimalEngName',
+            dataIndex: 'animalEngName',
             flex: 1,
             filter: 'string'
         },
         {
             text: 'Animal Name (Geo)',
-            dataIndex: 'AnimalGeoName',
+            dataIndex: 'animalGeoName',
             flex: 1,
             filter: 'string'
         },
         {
             text: 'Census Population',
-            dataIndex: 'CensusPopulation',
+            dataIndex: 'population',
             flex: 1,
             filter: 'number',
         },
         {
             text: 'Census Date',
-            dataIndex: 'CensusDate',
+            dataIndex: 'date',
             flex: 1,
             filter: 'date'
         }

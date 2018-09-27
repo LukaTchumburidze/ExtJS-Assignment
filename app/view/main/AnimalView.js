@@ -24,12 +24,13 @@ Ext.define('SimpleApp.view.main.AnimalView', {
 
     referenceHolder: true,
 
-    items: [{
-        title: 'Hierarchy',
-        xtype: 'tree-view',
-        margin: '0 10 0 0',
-        flex: 1
-    },
+    items: [
+        {
+            title: 'Hierarchy',
+            xtype: 'tree-view',
+            margin: '0 10 0 0',
+            flex: 1
+        },
         {
             xtype: 'connection-grid',
             reference: 'connectionGrid',

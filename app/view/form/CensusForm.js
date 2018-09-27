@@ -12,12 +12,12 @@ Ext.define('SimpleApp.view.form.CensusForm', {
         fieldLabel: 'Amount',
         xtype: 'numberfield',
         minValue: 0,
-        name: 'CensusPopulation',
+        name: 'population',
         emptyText: 'Amount of Population'
     }, {
         fieldLabel: 'Date',
         xtype: 'datefield',
-        name: 'CensusDate',
+        name: 'date',
         emptyText: 'Date of Census'
     }]
 });

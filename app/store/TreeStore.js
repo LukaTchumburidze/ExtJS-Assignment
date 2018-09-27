@@ -13,10 +13,7 @@ Ext.define('SimpleApp.store.TreeStore', {
     listeners: {
         nodebeforeexpand: function (node) {
             console.log('expanded');
-            if (node.firstChild.data.text !== 'empty') {
-                return;
-            }
-            var emptyChild = {
+            let emptyChild = {
                 text: 'empty',
                 expanded: true,
                 children: []
@@ -39,8 +36,8 @@ Ext.define('SimpleApp.store.TreeStore', {
                             node.data.children = [];
                             for (let i = 0; i < children.count(); i ++) {
                                 node.appendChild({
-                                    text: children.getAt(i).get('EngName') ?
-                                        children.getAt(i).get('EngName') :
+                                    text: children.getAt(i).get('engName') ?
+                                        children.getAt(i).get('engName') :
                                         Ext.Date.format(children.getAt(i).get('date'), 'd/m/Y'),
                                     id: children.getAt(i).getId(),
                                     expanded: false,

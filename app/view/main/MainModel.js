@@ -35,20 +35,8 @@ Ext.define('SimpleApp.view.main.MainModel', {
         isItemSelected: false,
         isConnectionSelected: false,
         selectedItem: null,
-        pastSelectedItem: null,
         chosenModelFieldset: null,
         censusSelected: false,
+        editItem: null,
     },
-
-    formulas: {
-        fieldSetName: function (get) {
-            var chosenModelFieldset = get('chosenModelFieldset');
-            if (chosenModelFieldset != null) {
-                return chosenModelFieldset.getData()['viewXtype'];
-            }
-
-            return '';
-
-        }
-    }
 });

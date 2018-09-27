@@ -3,6 +3,21 @@ Ext.define('SimpleApp.view.form.AnimalForm', {
     alias: 'animal-form',
     xtype: 'animal-form',
 
+    requires: [
+        'SimpleApp.view.main.MainModel'
+    ],
+
+    viewModel: {
+        type: 'main'
+    },
+
+    constructor: function () {
+        console.log("sssssssasdasdasdasdasdasd");
+        console.log(this.lookupReference("dog"));
+
+        this.callParent(arguments);
+    },
+
     title: 'Animal',
     defaultType: 'textfield',
     defaults: {
@@ -12,17 +27,21 @@ Ext.define('SimpleApp.view.form.AnimalForm', {
     items: [
         {
             fieldLabel: 'Georgian Name',
-            name: 'AnimalGeoName',
-            emptyText: 'ქართული დასახელება'
+            name: 'geoName',
+            emptyText: 'ქართული დასახელება',
+            bind: {
+                disabled: '{editItem}'
+            }
+
         },
         {
             fieldLabel: 'English Name',
-            name: 'AnimalEngName',
+            name: 'engName',
             emptyText: 'English Name'
         },
         {
             fieldLabel: 'Latin Name',
-            name: 'AnimalLatName',
+            name: 'latName',
             emptyText: 'Latine Nomine'
         },
     ]

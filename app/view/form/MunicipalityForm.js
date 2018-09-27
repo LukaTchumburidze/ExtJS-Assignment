@@ -12,7 +12,7 @@ Ext.define('SimpleApp.view.form.MunicipalityForm', {
     items: [
         {
             fieldLabel: 'Georgian Name',
-            name: 'MunicipalityEngName',
+            name: 'engName',
             emptyText: 'ქართული დასახელება'
         },
         {

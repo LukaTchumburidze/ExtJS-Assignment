@@ -18,7 +18,7 @@ Ext.define('SimpleApp.view.main.MainController', {
         for (let i = 0; i < municipalities.count(); i++) {
             let curMunicipality = municipalities.getAt(i);
             data.children.push({
-                text: curMunicipality.get('EngName'),
+                text: curMunicipality.get('engName'),
                 id: curMunicipality.getId(),
                 expanded: false,
                 depth: 1,
@@ -34,11 +34,16 @@ Ext.define('SimpleApp.view.main.MainController', {
         let treeView = this.getView().down('tree-view');
         let municipalities = viewModel.data['municipalities'];
 
+        var me = this;
         console.log('Building initial tree data');
-        let initialTreeStoreData = this.buildInitialTree(municipalities);
-        console.log(treeView.getStore().setRootNode(initialTreeStoreData));
-        console.log('Initial Tree data:');
-        console.log(treeView.getStore());
+        municipalities.load({
+            callback: function () {
+                let initialTreeStoreData = me.buildInitialTree(municipalities);
+                console.log(treeView.getStore().setRootNode(initialTreeStoreData));
+                console.log('Initial Tree data:');
+                console.log(treeView.getStore());
+            }
+        });
     }
 });
 

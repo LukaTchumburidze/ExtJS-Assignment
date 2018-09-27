@@ -10,30 +10,22 @@ Ext.define('SimpleApp.model.Municipality', {
     fields: [{
         name: 'id'
     }, {
-        name: 'EngName',
+        name: 'engName',
         type: 'string'
     }, {
-        name: 'GeoName',
+        name: 'geoName',
+        type: 'string'
+    }, {
+        name: 'parentId',
         type: 'string'
     }],
 
     proxy: {
-        type: 'memory',
-
-        data: [
-            {
-                "id": "europe",
-                "EngName": "Europe",
-                "GeoName": "ევროპა"
-            },
-            {
-                "id": "africa",
-                "EngName": "Africa",
-                "GeoName": "აფრიკა"
-            }],
+        type: 'rest',
+        url: 'http://localhost:8080/helloworld-rs/rest/main/municipality',
 
         reader: {
-            type: 'json'
+            type: 'json',
         }
     }
 });

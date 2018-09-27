@@ -3,7 +3,8 @@ Ext.define('SimpleApp.model.Animal', {
     alias: 'animal',
 
     requires: [
-        'SimpleApp.model.Census'
+        'Ext.data.proxy.Rest',
+        'Ext.data.reader.Json'
     ],
 
     fields: [
@@ -11,19 +12,19 @@ Ext.define('SimpleApp.model.Animal', {
             name: 'id'
         },
         {
-            name: 'EngName',
+            name: 'engName',
             type: 'string'
         },
         {
-            name: 'GeoName',
+            name: 'geoName',
             type: 'string'
         },
         {
-            name: 'LatName',
+            name: 'latName',
             type: 'string'
         },
         {
-            name: 'parentID',
+            name: 'parentId',
             reference: {
                 parent: 'Municipality',
                 association: 'AnimalToMunicipality',
@@ -37,23 +38,8 @@ Ext.define('SimpleApp.model.Animal', {
     ],
 
     proxy: {
-        type: 'memory',
-
-        data: [
-            {
-                "id": "wolf",
-                "EngName": "Wolf",
-                "GeoName": "მგელი",
-                "LatName": "Lupus",
-                "parentID": "europe"
-            },
-            {
-                "id": "lion",
-                "EngName": "Lion",
-                "GeoName": "ლომი",
-                "LatName": "Leo",
-                "parentID": "africa"
-            }],
+        type: 'rest',
+        url: 'http://localhost:8080/helloworld-rs/rest/main/animal',
 
         reader: {
             type: 'json',

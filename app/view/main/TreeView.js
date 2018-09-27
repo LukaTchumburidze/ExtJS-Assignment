@@ -19,7 +19,7 @@ Ext.define('SimpleApp.view.main.TreeView', {
     listeners: {
         select: 'nodeSelect'
     },
-
+//TODO
     store: Ext.create('treeStore'),
 
     rootVisible: false,

@@ -22,21 +22,82 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
     onRemoveItem: function () {
         let viewModel = this.getView().getViewModel();
         let selectedItem = viewModel.get('selectedItem');
-        selectedItem.remove();
 
         console.log('Removing Item:');
         console.log(selectedItem);
         let curStore = Ext.data.StoreManager.get(storeIdMapping[selectedItem.getDepth() - 1]);
-        curStore.remove(curStore.getById(selectedItem.id));
+        curStore.getById(selectedItem.id).erase();
+        curStore.load({
+            callback: function () {
+                selectedItem.remove();
+            }
+        });
     },
 
     onEditItem: function () {
-        console.log('Method is not yet implemented!');
+        let selectedItem = this.getView().getViewModel().get('selectedItem');
+        let depth = selectedItem.getDepth()-1;
+        console.log('selectedItem');
+        console.log(selectedItem);
+
+        let curStore = this.getView().getViewModel().get(storeIdMapping[depth]);
+        let curModel = curStore.getById(selectedItem.id);
+        this.getView().getViewModel().set('editItem', curModel);
+
+        console.log('editItem');
+        console.log('curItem');
+        console.log(this.getView().getViewModel().get('editItem').getData());
+
+        let win = Ext.create('Ext.window.Window', {
+            title: 'Edit Item',
+
+            reference: 'dog',
+            items: [
+                {
+                    xtype: formXtypeMapping[depth],
+                    title: titleMapping[depth]
+                }
+            ],
+
+            // fbar: [
+            //     {
+            //         text: 'Submit',
+            //         formBind: true,
+            //         itemId: 'submit',
+            //         handler: function () {
+            //             let formFields = win.items.getRange()[0].items.getRange();
+            //             let modelFields = curModel.getFields();
+            //             console.log("fields");
+            //             console.log(formFields);
+            //             console.log(modelFields);
+            //
+            //             for (let i = 0; i < formFields.length; i++) {
+            //                 curModel.set(formFields[i].name, formFields[i].value);
+            //             }
+            //
+            //             curModel.set('parentId', selectedItem.id);
+            //             console.log(curModel.get('parentId'));
+            //             curModel.save();
+            //             console.log(curModel);
+            //             curStore.load({
+            //                 callback: function () {
+            //                     selectedItem.collapse();
+            //                     selectedItem.expand();
+            //                     win.close();
+            //                 }
+            //             });
+            //         }
+            //     }
+            // ]
+        });
+        win.show();
     },
 
     onAddItem: function () {
         let depth, selectedItem = this.getView().getViewModel().get('selectedItem');
-        if (selectedItem == null || selectedItem === undefined) {
+        console.log('selectedItem');
+        console.log(selectedItem);
+        if (!selectedItem) {
             depth = 0;
         } else {
             depth = selectedItem.getDepth();
@@ -44,58 +105,51 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
 
         let curModel = Ext.create(modelXtypeMapping[depth]);
 
+        console.log(depth);
         let curStore = this.getView().getViewModel().get(storeIdMapping[depth]);
-        var treeStore = this.getView().getStore();
 
         let win = Ext.create('Ext.window.Window', {
             title: 'Add Item',
-            width: 500,
-            height: 500,
 
             items: [
                 {
                     xtype: formXtypeMapping[depth],
                     title: titleMapping[depth]
-                },
+                }
+            ],
+
+            fbar: [
                 {
-                    fbar: [
-                        {
-                            text: 'Submit',
-                            formBind: true,
-                            itemId: 'submit',
-                            handler: function () {
-                                let formFields = win.items.getRange()[0].items.getRange();
-                                let modelFields = curModel.getFields();
-                                //For raw data addition
-                                let modelMapping = {};
+                    text: 'Submit',
+                    formBind: true,
+                    itemId: 'submit',
+                    handler: function () {
+                        let formFields = win.items.getRange()[0].items.getRange();
+                        let modelFields = curModel.getFields();
+                        console.log("fields");
+                        console.log(formFields);
+                        console.log(modelFields);
 
-                                for (let i = 0; i < formFields.length; i++) {
-                                    curModel.set(modelFields[i + 1].getName(), formFields[i].value);
-                                    modelMapping[modelFields[i + 1].getName()] = formFields[i].value;
-                                }
-
-                                curModel.set('parentId', selectedItem.id);
-                                modelMapping['parentId'] = selectedItem.id;
-                                modelMapping['id'] = curModel.getId();
-                                //TODO: Update stores accordingly
-                                // console.log('children');
-                                // curModel.getProxy().data.push(modelMapping);
-                                // parModel.children().getProxy().data.push(modelMapping);
-                                // parModel.children().load({
-                                //     callback: function () {
-                                //         console.log(parModel.children());
-                                //     }
-                                // });
-                                curStore.load({
-                                    callback: function () {
-                                        console.log('Loaded');
-                                        console.log(curStore);
-                                        win.close();
-                                    }
-                                });
-                            }
+                        for (let i = 0; i < formFields.length; i++) {
+                            curModel.set(formFields[i].name, formFields[i].value);
                         }
-                    ]
+
+                        if (depth != 0) {
+                            curModel.set('parentId', selectedItem.id);
+                        } else {
+                            curModel.set('parentId', 'root');
+                        }
+                        console.log(curModel.get('parentId'));
+                        curModel.save();
+                        console.log(curModel);
+                        curStore.load({
+                            callback: function () {
+                                selectedItem.collapse();
+                                selectedItem.expand();
+                                win.close();
+                            }
+                        });
+                    }
                 }
             ]
         });
@@ -113,19 +167,19 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
         switch (depth) {
             case 1:
                 curModel = Ext.data.StoreManager.get('municipalities').getById(node.id);
-                dataSoFar.set('MunicipalityEngName', curModel.get('EngName'));
-                dataSoFar.set('MunicipalityGeoName', curModel.get('GeoName'));
+                dataSoFar.set('engName', curModel.get('engName'));
+                dataSoFar.set('MunicipalityGeoName', curModel.get('geoName'));
                 break;
             case 2:
                 curModel = Ext.data.StoreManager.get('animals').getById(node.id);
-                dataSoFar.set('AnimalEngName', curModel.get('EngName'));
-                dataSoFar.set('AnimalGeoName', curModel.get('GeoName'));
-                dataSoFar.set('AnimalLatName', curModel.get('LatName'));
+                dataSoFar.set('engName', curModel.get('engName'));
+                dataSoFar.set('geoName', curModel.get('geoName'));
+                dataSoFar.set('latName', curModel.get('latName'));
                 break;
             case 3:
                 curModel = Ext.data.StoreManager.get('censuses').getById(node.id);
-                dataSoFar.set('CensusPopulation', curModel.get('population'));
-                dataSoFar.set('CensusDate', curModel.get('date'));
+                dataSoFar.set('population', curModel.get('population'));
+                dataSoFar.set('date', curModel.get('date'));
                 break;
         }
         this.getParentData(dataSoFar, node.parentNode);
@@ -134,36 +188,41 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
     getChildData: function (node, dataSoFar, connectionStore) {
         let depth = node.getDepth();
         let curModel;
+        let me = this;
+        let curStore = Ext.data.StoreManager.get(storeIdMapping[depth - 1]);
 
-        switch (depth) {
-            case 1:
-                curModel = Ext.data.StoreManager.get('municipalities').getById(node.id);
-                dataSoFar.set('MunicipalityEngName', curModel.get('EngName'));
-                dataSoFar.set('MunicipalityGeoName', curModel.get('GeoName'));
-                break;
-            case 2:
-                curModel = Ext.data.StoreManager.get('animals').getById(node.id);
-                dataSoFar.set('AnimalEngName', curModel.get('EngName'));
-                dataSoFar.set('AnimalGeoName', curModel.get('GeoName'));
-                dataSoFar.set('AnimalLatName', curModel.get('LatName'));
-                break;
-            case 3:
-                curModel = Ext.data.StoreManager.get('censuses').getById(node.id);
-                dataSoFar.set('CensusPopulation', curModel.get('population'));
-                dataSoFar.set('CensusDate', curModel.get('date'));
-                break;
-        }
+        curStore.load({
+            callback: function () {
+                curModel = curStore.getById(node.id);
+                switch (depth) {
+                    case 1:
+                        dataSoFar.set('engName', curModel.get('engName'));
+                        dataSoFar.set('MunicipalityGeoName', curModel.get('geoName'));
+                        break;
+                    case 2:
+                        dataSoFar.set('engName', curModel.get('engName'));
+                        dataSoFar.set('geoName', curModel.get('geoName'));
+                        dataSoFar.set('latName', curModel.get('latName'));
+                        break;
+                    case 3:
+                        dataSoFar.set('population', curModel.get('population'));
+                        dataSoFar.set('date', curModel.get('date'));
+                        break;
+                }
 
-        if (depth === 3) {
-            dataSoFar = dataSoFar.copy(null);
-            connectionStore.add(dataSoFar);
-            return;
-        }
-
-        var me = this;
-        node.expand();
-        node.eachChild(function (childNode) {
-            me.getChildData(childNode, dataSoFar, connectionStore);
+                if (depth === 3) {
+                    dataSoFar = dataSoFar.copy(null);
+                    connectionStore.add(dataSoFar);
+                    return;
+                }
+                node.expand({
+                    callback: function () {
+                        node.eachChild(function (childNode) {
+                            me.getChildData(childNode, dataSoFar, connectionStore);
+                        });
+                    }
+                });
+            }
         });
     },
 
