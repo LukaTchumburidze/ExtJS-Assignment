@@ -30,20 +30,27 @@ Ext.define('SimpleApp.view.main.MainController', {
     },
 
     init: function () {
-        let viewModel = this.getView('animal-views').getViewModel();
+        // let viewModel = this.getView('animal-views').getViewModel();
         let treeView = this.getView().down('tree-view');
-        let municipalities = viewModel.data['municipalities'];
-
-        var me = this;
-        console.log('Building initial tree data');
-        municipalities.load({
+        console.log(treeView.getStore())
+        treeView.getStore().load({
             callback: function () {
-                let initialTreeStoreData = me.buildInitialTree(municipalities);
-                console.log(treeView.getStore().setRootNode(initialTreeStoreData));
-                console.log('Initial Tree data:');
-                console.log(treeView.getStore());
+                console.log(arguments);
+                console.log("qwdsdasda");
             }
         });
+        // let municipalities = viewModel.data['municipalities'];
+        //
+        // var me = this;
+        // console.log('Building initial tree data');
+        // municipalities.load({
+        //     callback: function () {
+        //         let initialTreeStoreData = me.buildInitialTree(municipalities);
+        //         console.log(treeView.getStore().setRootNode(initialTreeStoreData));
+        //         console.log('Initial Tree data:');
+        //         console.log(treeView.getStore());
+        //     }
+        // });
     }
 });
 

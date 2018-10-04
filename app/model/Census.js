@@ -28,7 +28,7 @@ Ext.define('SimpleApp.model.Census', {
 
     proxy: {
         type: 'rest',
-        url: 'http://localhost:8080/helloworld-rs/rest/main/census',
+        url: 'http://localhost:8080/lukatchumburidze/rest/main/census',
 
         reader: {
             type: 'json',

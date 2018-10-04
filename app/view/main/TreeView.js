@@ -1,8 +1,10 @@
 Ext.define('SimpleApp.view.main.TreeView', {
     extend: 'Ext.tree.Panel',
     requires: [
+        'Ext.data.proxy.Rest',
+        'Ext.data.reader.Json',
+        'SimpleApp.view.main.TreeView.Controller',
         'SimpleApp.store.TreeStore',
-        'SimpleApp.view.main.TreeView.Controller'
     ],
     xtype: 'tree-view',
     id: 'tree-view',
@@ -19,7 +21,7 @@ Ext.define('SimpleApp.view.main.TreeView', {
     listeners: {
         select: 'nodeSelect'
     },
-//TODO
+
     store: Ext.create('treeStore'),
 
     rootVisible: false,
