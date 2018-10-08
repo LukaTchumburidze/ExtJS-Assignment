@@ -59,66 +59,59 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
                 }
             ],
 
-            // fbar: [
-            //     {
-            //         text: 'Submit',
-            //         formBind: true,
-            //         itemId: 'submit',
-            //         handler: function () {
-            //             let formFields = win.items.getRange()[0].items.getRange();
-            //             let modelFields = curModel.getFields();
-            //             console.log("fields");
-            //             console.log(formFields);
-            //             console.log(modelFields);
-            //
-            //             for (let i = 0; i < formFields.length; i++) {
-            //                 curModel.set(formFields[i].name, formFields[i].value);
-            //             }
-            //
-            //             curModel.set('parentId', selectedItem.id);
-            //             console.log(curModel.get('parentId'));
-            //             curModel.save();
-            //             console.log(curModel);
-            //             curStore.load({
-            //                 callback: function () {
-            //                     selectedItem.collapse();
-            //                     selectedItem.expand();
-            //                     win.close();
-            //                 }
-            //             });
-            //         }
-            //     }
-            // ]
+            fbar: [
+                {
+                    text: 'Submit',
+                    formBind: true,
+                    itemId: 'submit',
+                    handler: function () {
+                        let formFields = win.items.getRange()[0].items.getRange();
+                        let modelFields = curModel.getFields();
+                        console.log("fields");
+                        console.log(formFields);
+                        console.log(modelFields);
+
+                        for (let i = 0; i < formFields.length; i++) {
+                            curModel.set(formFields[i].name, formFields[i].value);
+                        }
+
+                        curModel.set('parentId', selectedItem.id);
+                        console.log(curModel.get('parentId'));
+                        curModel.save();
+                        console.log(curModel);
+                        curStore.load({
+                            callback: function () {
+                                selectedItem.collapse();
+                                selectedItem.expand();
+                                win.close();
+                            }
+                        });
+                    }
+                }
+            ]
         });
         win.show();
     },
 
     onAddItem: function () {
         var treeView = this.getView(), treeStore = treeView.getStore();
-        let parentId, depth, selectedItem = treeView.getViewModel().get('selectedItem');
+        let selectedItem = treeView.getViewModel().get('selectedItem');
         if (!selectedItem) {
-            depth = 0;
-            parentId = "src";
             selectedItem = treeStore.getRoot();
-        } else {
-            depth = selectedItem.getDepth();
-            parentId = selectedItem.id;
         }
+
         console.log('selectedItem');
         console.log(selectedItem);
-
-        let curModel = Ext.create(modelXtypeMapping[depth]);
-
-        console.log(depth);
-        let curStore = this.getView().getViewModel().get(storeIdMapping[depth]);
+        let curModel = Ext.create(modelXtypeMapping[selectedItem.getDepth()]);
+        let curStore = this.getView().getViewModel().get(storeIdMapping[selectedItem.getDepth()]);
 
         let win = Ext.create('Ext.window.Window', {
             title: 'Add Item',
 
             items: [
                 {
-                    xtype: formXtypeMapping[depth],
-                    title: titleMapping[depth]
+                    xtype: formXtypeMapping[selectedItem.getDepth()],
+                    title: titleMapping[selectedItem.getDepth()]
                 }
             ],
 
@@ -138,96 +131,19 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
                             curModel.set(formFields[i].name, formFields[i].value);
                         }
 
-                        if (depth !== 0) {
-                            curModel.set('text', 'none');
-                            curModel.set('parentId', parentId);
-                        } else {
-                            curModel.set('parentId', 'root');
-                        }
+                        curModel.set('parentId', selectedItem.id);
                         console.log(curModel.get('parentId'));
                         curModel.save();
                         console.log(curModel);
 
                         curStore.load();
-                        treeStore.load({
-                            node: selectedItem
-                        });
+                        treeStore.load({node: selectedItem});
                         win.close();
                     }
                 }
             ]
         });
         win.show();
-    },
-
-    getParentData: function (dataSoFar, node) {
-        let depth = node.getDepth();
-
-        if (depth <= 0) {
-            return;
-        }
-        let curModel;
-
-        switch (depth) {
-            case 1:
-                curModel = Ext.data.StoreManager.get('municipalities').getById(node.id);
-                dataSoFar.set('engName', curModel.get('engName'));
-                dataSoFar.set('MunicipalityGeoName', curModel.get('geoName'));
-                break;
-            case 2:
-                curModel = Ext.data.StoreManager.get('animals').getById(node.id);
-                dataSoFar.set('engName', curModel.get('engName'));
-                dataSoFar.set('geoName', curModel.get('geoName'));
-                dataSoFar.set('latName', curModel.get('latName'));
-                break;
-            case 3:
-                curModel = Ext.data.StoreManager.get('censuses').getById(node.id);
-                dataSoFar.set('population', curModel.get('population'));
-                dataSoFar.set('date', curModel.get('date'));
-                break;
-        }
-        this.getParentData(dataSoFar, node.parentNode);
-    },
-
-    getChildData: function (node, dataSoFar, connectionStore) {
-        let depth = node.getDepth();
-        let curModel;
-        let me = this;
-        let curStore = Ext.data.StoreManager.get(storeIdMapping[depth - 1]);
-
-        curStore.load({
-            callback: function () {
-                curModel = curStore.getById(node.id);
-                switch (depth) {
-                    case 1:
-                        dataSoFar.set('engName', curModel.get('engName'));
-                        dataSoFar.set('MunicipalityGeoName', curModel.get('geoName'));
-                        break;
-                    case 2:
-                        dataSoFar.set('engName', curModel.get('engName'));
-                        dataSoFar.set('geoName', curModel.get('geoName'));
-                        dataSoFar.set('latName', curModel.get('latName'));
-                        break;
-                    case 3:
-                        dataSoFar.set('population', curModel.get('population'));
-                        dataSoFar.set('date', curModel.get('date'));
-                        break;
-                }
-
-                if (depth === 3) {
-                    dataSoFar = dataSoFar.copy(null);
-                    connectionStore.add(dataSoFar);
-                    return;
-                }
-                node.expand({
-                    callback: function () {
-                        node.eachChild(function (childNode) {
-                            me.getChildData(childNode, dataSoFar, connectionStore);
-                        });
-                    }
-                });
-            }
-        });
     },
 
     nodeSelect: function (event, record) {
