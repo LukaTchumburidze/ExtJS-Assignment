@@ -17,7 +17,7 @@ Ext.define('SimpleApp.view.form.MunicipalityForm', {
         },
         {
             fieldLabel: 'English Name',
-            name: 'MunicipalityGeoName',
+            name: 'geoName',
             emptyText: 'English Name'
         }
     ]

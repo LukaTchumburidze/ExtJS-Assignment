@@ -13,7 +13,7 @@ Ext.define('SimpleApp.store.TreeStore', {
 
     root: {
         text: 'Hierarchy',
-        id: 'src',
+        id: 'root',
         expanded: true
     }
 });

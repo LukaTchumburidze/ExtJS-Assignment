@@ -36,7 +36,7 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
 
     onEditItem: function () {
         let selectedItem = this.getView().getViewModel().get('selectedItem');
-        let depth = selectedItem.getDepth()-1;
+        let depth = selectedItem.getDepth() - 1;
         console.log('selectedItem');
         console.log(selectedItem);
 
@@ -94,14 +94,18 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
     },
 
     onAddItem: function () {
-        let depth, selectedItem = this.getView().getViewModel().get('selectedItem');
-        console.log('selectedItem');
-        console.log(selectedItem);
+        var treeView = this.getView(), treeStore = treeView.getStore();
+        let parentId, depth, selectedItem = treeView.getViewModel().get('selectedItem');
         if (!selectedItem) {
             depth = 0;
+            parentId = "src";
+            selectedItem = treeStore.getRoot();
         } else {
             depth = selectedItem.getDepth();
+            parentId = selectedItem.id;
         }
+        console.log('selectedItem');
+        console.log(selectedItem);
 
         let curModel = Ext.create(modelXtypeMapping[depth]);
 
@@ -134,21 +138,21 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
                             curModel.set(formFields[i].name, formFields[i].value);
                         }
 
-                        if (depth != 0) {
-                            curModel.set('parentId', selectedItem.id);
+                        if (depth !== 0) {
+                            curModel.set('text', 'none');
+                            curModel.set('parentId', parentId);
                         } else {
                             curModel.set('parentId', 'root');
                         }
                         console.log(curModel.get('parentId'));
                         curModel.save();
                         console.log(curModel);
-                        curStore.load({
-                            callback: function () {
-                                selectedItem.collapse();
-                                selectedItem.expand();
-                                win.close();
-                            }
+
+                        curStore.load();
+                        treeStore.load({
+                            node: selectedItem
                         });
+                        win.close();
                     }
                 }
             ]
@@ -227,20 +231,6 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
     },
 
     nodeSelect: function (event, record) {
-        if (record.getDepth() === 3) {
-            this.getView().getViewModel().set('censusSelected', true);
-        } else {
-            this.getView().getViewModel().set('censusSelected', false);
-        }
 
-        let dataSoFar = Ext.create('gridRow');
-        let connectionStore = this.getView().up().down('connection-grid').getViewModel().get('gridStore');
-
-        connectionStore.clearData();
-        connectionStore.load();
-
-        this.getParentData(dataSoFar, record.parentNode);
-        this.getChildData(record, dataSoFar, connectionStore);
-        connectionStore.sync();
     }
 });
