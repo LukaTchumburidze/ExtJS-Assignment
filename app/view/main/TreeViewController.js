@@ -20,22 +20,30 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
     ],
 
     onRemoveItem: function () {
+        var treeView = this.getView(), treeStore = treeView.getStore();
         let viewModel = this.getView().getViewModel();
         let selectedItem = viewModel.get('selectedItem');
 
         console.log('Removing Item:');
         console.log(selectedItem);
         let curStore = Ext.data.StoreManager.get(storeIdMapping[selectedItem.getDepth() - 1]);
-        curStore.getById(selectedItem.id).erase();
-        curStore.load({
+        let curModel = curStore.getById(selectedItem.id);
+
+        curModel.erase({
             callback: function () {
-                selectedItem.remove();
+                console.log(curModel);
+
+                curStore.load();
+                treeStore.load({node: selectedItem.parentNode});
             }
         });
+
     },
 
     onEditItem: function () {
+        var treeView = this.getView(), treeStore = treeView.getStore();
         let selectedItem = this.getView().getViewModel().get('selectedItem');
+        console.log(this.getView().getViewModel().get('editItem'));
         let depth = selectedItem.getDepth() - 1;
         console.log('selectedItem');
         console.log(selectedItem);
@@ -51,7 +59,6 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
         let win = Ext.create('Ext.window.Window', {
             title: 'Edit Item',
 
-            reference: 'dog',
             items: [
                 {
                     xtype: formXtypeMapping[depth],
@@ -66,10 +73,8 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
                     itemId: 'submit',
                     handler: function () {
                         let formFields = win.items.getRange()[0].items.getRange();
-                        let modelFields = curModel.getFields();
                         console.log("fields");
                         console.log(formFields);
-                        console.log(modelFields);
 
                         for (let i = 0; i < formFields.length; i++) {
                             curModel.set(formFields[i].name, formFields[i].value);
@@ -77,15 +82,15 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
 
                         curModel.set('parentId', selectedItem.id);
                         console.log(curModel.get('parentId'));
-                        curModel.save();
-                        console.log(curModel);
-                        curStore.load({
+                        curModel.save({
                             callback: function () {
-                                selectedItem.collapse();
-                                selectedItem.expand();
-                                win.close();
+                                console.log(curModel);
+
+                                curStore.load();
+                                treeStore.load({node: selectedItem.parentNode});
                             }
                         });
+                        win.close();
                     }
                 }
             ]

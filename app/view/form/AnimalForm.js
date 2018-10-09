@@ -7,15 +7,8 @@ Ext.define('SimpleApp.view.form.AnimalForm', {
         'SimpleApp.view.main.MainModel'
     ],
 
-    viewModel: {
-        type: 'main'
-    },
-
-    constructor: function () {
-        console.log("sssssssasdasdasdasdasdasd");
-        console.log(this.lookupReference("dog"));
-
-        this.callParent(arguments);
+    init: function () {
+        console.log("hii12321232");
     },
 
     title: 'Animal',
@@ -29,10 +22,6 @@ Ext.define('SimpleApp.view.form.AnimalForm', {
             fieldLabel: 'Georgian Name',
             name: 'geoName',
             emptyText: 'ქართული დასახელება',
-            bind: {
-                disabled: '{editItem}'
-            }
-
         },
         {
             fieldLabel: 'English Name',

@@ -37,6 +37,13 @@ Ext.define('SimpleApp.view.main.MainModel', {
         selectedItem: null,
         chosenModelFieldset: null,
         censusSelected: false,
-        editItem: null,
+        editItem: 123123,
     },
+
+    formulas: {
+        getSomething: function (get) {
+            console.log(arguments);
+            return true;
+        }
+    }
 });

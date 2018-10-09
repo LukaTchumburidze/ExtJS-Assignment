@@ -8,6 +8,7 @@ Ext.define('SimpleApp.view.main.Main', {
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
 
+        'SimpleApp.view.main.MunicipalityPage',
         'SimpleApp.view.main.MainController',
         'SimpleApp.view.main.MainModel'
     ],
@@ -29,10 +30,19 @@ Ext.define('SimpleApp.view.main.Main', {
         }
     },
 
-    items: [{
-        title: 'Animal Data',
-        items: [{
-            xtype: 'layout-horizontal-box'
-        }]
-    }]
+    items: [
+        {
+            title: 'Animal Data',
+            items: [{
+                xtype: 'layout-horizontal-box'
+            }]
+        },
+        {
+            title: 'Municipality page',
+            items: [ {
+                xtype: 'municipality-page'
+                }
+            ]
+        }
+    ]
 });
