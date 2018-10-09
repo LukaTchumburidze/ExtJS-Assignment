@@ -39,7 +39,7 @@ Ext.define('SimpleApp.model.Animal', {
 
     proxy: {
         type: 'rest',
-        url: 'http://localhost:8080/lukatchumburidze/rest/main/animal',
+        url: 'http://localhost:8080/lukatchumburidze/rest/animal',
 
         reader: {
             type: 'json',

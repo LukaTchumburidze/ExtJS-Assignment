@@ -22,7 +22,7 @@ Ext.define('SimpleApp.model.Municipality', {
 
     proxy: {
         type: 'rest',
-        url: 'http://localhost:8080/lukatchumburidze/rest/main/municipality',
+        url: 'http://localhost:8080/lukatchumburidze/rest/municipality',
 
         reader: {
             type: 'json',

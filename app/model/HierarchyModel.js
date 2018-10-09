@@ -4,6 +4,6 @@ Ext.define('SimpleApp.model.HierarchyModel', {
 
     proxy: {
         type: 'rest',
-        url: 'http://localhost:8080/lukatchumburidze/rest/main/tree',
+        url: 'http://localhost:8080/lukatchumburidze/rest/tree',
     },
 });

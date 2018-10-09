@@ -49,9 +49,6 @@ Ext.define('SimpleApp.view.main.MunicipalityPage', {
                 }
 
                 for (let i = 0; i < formFields.length; i++) {
-                    console.log("dad");
-                    console.log(formFields[i].name);
-                    console.log(formFields[i].value);
                     curModel.set(formFields[i].name, formFields[i].value);
                     formFields[i].reset();
                 }

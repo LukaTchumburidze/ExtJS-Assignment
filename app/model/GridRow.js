@@ -32,15 +32,15 @@ Ext.define('SimpleApp.model.GridRow', {
             type: 'date',
             dateFormat: 'd/m/Y'
         }
-    ]
+    ],
 
-    // proxy: {
-    //     type: 'memory',
-    //
-    //     data: [],
-    //
-    //     reader: {
-    //         type: 'json',
-    //     }
-    // }
+    proxy: {
+        type: 'rest',
+        url: 'http://localhost:8080/lukatchumburidze/rest/grid',
+
+        reader: {
+            rootProperty: 'items',
+            totalProperty: 'results',
+        },
+    }
 });

@@ -152,6 +152,14 @@ Ext.define('SimpleApp.view.main.TreeView.Controller', {
     },
 
     nodeSelect: function (event, record) {
+        var treeView = this.getView(), treeStore = treeView.getStore();
+        let selectedItem = record;
+        let gridStore = this.getView().up().down('connection-grid').getViewModel().get('gridStore');
 
+        gridStore.load({
+            params: {
+                path: selectedItem.getPath()
+            }
+        })
     }
 });
